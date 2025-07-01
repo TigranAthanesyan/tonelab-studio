@@ -3,17 +3,125 @@
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
+  --button-primary-hover: #e6b800;
+  --button-secondary-hover: #1a1a1a;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
+  min-height: calc(100vh - 80px);
   font-family: var(--font-geist-sans);
+}
+
+.hero {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.heroContent h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+}
+
+.heroContent p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.primaryBtn, .secondaryBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.primaryBtn {
+  background-color: var(--primary);
+  color: #000;
+}
+
+.primaryBtn:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondaryBtn {
+  border: 1px solid white;
+  color: white;
+}
+
+.secondaryBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.features {
+  padding: 5rem 0;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+}
+
+.featureCard h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .heroContent h1 {
+    font-size: 3rem;
+  }
+  
+  .heroContent p {
+    font-size: 1.2rem;
+  }
+  
+  .heroCtas {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

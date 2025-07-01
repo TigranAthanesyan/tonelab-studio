@@ -20,6 +20,41 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database Setup
+
+This project uses MongoDB with Mongoose for data persistence. The database connection is configured using environment variables.
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
+
+### Cloudinary Setup
+
+1. Sign up for a free Cloudinary account at [cloudinary.com](https://cloudinary.com)
+2. Get your credentials from the Dashboard
+3. Add them to your `.env.local` file
+4. Images will be automatically uploaded to Cloudinary and optimized
+
+### Database Models
+
+- **Events**: Contains title, description, date, and ticket price for studio events
+
+### API Endpoints
+
+- `GET /api/events` - Fetch all events
+- `POST /api/events` - Create a new event
+
+### Testing the Database
+
+Visit the `/events` page to see a test interface for adding and viewing events from the database.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

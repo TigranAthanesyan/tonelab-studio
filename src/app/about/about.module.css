@@ -1,0 +1,81 @@
+.aboutPage {
+  padding: 2rem 0;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 4rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary);
+}
+
+.section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+
+.facilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.facilityCard {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.facilityCard:hover {
+  transform: translateY(-5px);
+}
+
+.facilityCard h3 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.teamMembers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 2.5rem;
+  }
+  
+  .section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .facilitiesGrid {
+    grid-template-columns: 1fr;
+  }
+} 
