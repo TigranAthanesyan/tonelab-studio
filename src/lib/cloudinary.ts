@@ -21,10 +21,10 @@ export const uploadImage = async (file: File): Promise<string> => {
     // Upload to Cloudinary
     const result = await cloudinary.uploader.upload(dataURI, {
       folder: 'tonelab-events',
-      // transformation: [
-      //   { width: 800, height: 600, crop: 'fill' },
-      //   { quality: 'auto' }
-      // ]
+      transformation: [
+        { width: 800, height: 600, crop: 'fill' },
+        { quality: 'auto' }
+      ]
     });
 
     return result.secure_url;
