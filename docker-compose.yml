@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    restart: always
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: tonelabdb
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
