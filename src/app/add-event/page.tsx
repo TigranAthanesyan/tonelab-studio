@@ -14,6 +14,8 @@ export default function AddEventPage() {
   });
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
+  const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,13 +48,35 @@ export default function AddEventPage() {
         return;
       }
 
-      // Step 2: Create event with the image URL
+      // Step 2: Upload video if selected
+      let videoUrl: string | undefined;
+      if (selectedVideo) {
+        const videoFormData = new FormData();
+        videoFormData.append('video', selectedVideo);
+
+        const videoResponse = await fetch('/api/upload-video', {
+          method: 'POST',
+          body: videoFormData,
+        });
+
+        const videoData = await videoResponse.json();
+        
+        if (!videoData.success) {
+          setError(`Video upload failed: ${videoData.error}`);
+          return;
+        }
+        
+        videoUrl = videoData.videoUrl;
+      }
+
+      // Step 3: Create event with the image URL and optional video URL
       const eventPayload = {
         title: formData.title,
         description: formData.description,
         date: formData.date,
         ticketPrice: parseFloat(formData.ticketPrice),
-        imageUrl: imageData.imageUrl
+        imageUrl: imageData.imageUrl,
+        videoUrl
       };
       
       const eventResponse = await fetch('/api/events', {
@@ -100,6 +124,32 @@ export default function AddEventPage() {
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleVideoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    
+    if (file) {
+      if (file.size === 0) {
+        setError('Selected video file is empty');
+        return;
+      }
+      
+      // Check file size (limit to 100MB for video)
+      const maxSize = 100 * 1024 * 1024; // 100MB
+      if (file.size > maxSize) {
+        setError('Video file size must be less than 100MB');
+        return;
+      }
+      
+      setSelectedVideo(file);
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setVideoPreview(e.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -200,6 +250,31 @@ export default function AddEventPage() {
             {imagePreview && (
               <div className={styles.imagePreview}>
                 <img src={imagePreview} alt="Preview" />
+              </div>
+            )}
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="video" className={styles.label}>
+              Event Video (Optional)
+            </label>
+            <input
+              type="file"
+              id="video"
+              name="video"
+              onChange={handleVideoChange}
+              className={styles.fileInput}
+              accept="video/*"
+            />
+            <small className={styles.helpText}>
+              Supported formats: MP4, MOV, AVI. Max size: 100MB
+            </small>
+            {videoPreview && (
+              <div className={styles.videoPreview}>
+                <video controls width="100%" style={{ maxWidth: '400px' }}>
+                  <source src={videoPreview} type={selectedVideo?.type} />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             )}
           </div>

@@ -22,7 +22,15 @@ export async function POST(request: NextRequest) {
     
     // Handle event data (JSON format)
     const body = await request.json();
-    const { title, description, date, ticketPrice, imageUrl } = body;
+    const { title, description, date, ticketPrice, imageUrl, videoUrl } = body;
+    
+    // Debug logging
+    console.log('Received event data:', { title, description, date, ticketPrice, imageUrl, videoUrl });
+    
+    // Check if videoUrl field exists in schema
+    const schema = Event.schema;
+    console.log('Schema fields:', Object.keys(schema.paths));
+    console.log('videoUrl field exists:', 'videoUrl' in schema.paths);
     
     // Validate that imageUrl is present
     if (!imageUrl || typeof imageUrl !== 'string') {
@@ -32,14 +40,23 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Create event with image URL
-    const event = await Event.create({
+    // Create event data object
+    const eventData = {
       title,
       description,
       date: new Date(date),
       ticketPrice,
-      imageUrl
-    });
+      imageUrl,
+      videoUrl // This is optional, so it can be undefined
+    };
+    
+    console.log('Creating event with data:', eventData);
+    
+    // Create event with image URL and optional video URL
+    const event = await Event.create(eventData);
+    
+    console.log('Created event:', event);
+    console.log('Event videoUrl:', event.videoUrl);
     
     return NextResponse.json({ success: true, data: event }, { status: 201 });
   } catch (error: unknown) {

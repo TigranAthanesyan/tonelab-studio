@@ -6,6 +6,7 @@ export interface IEvent extends Document {
   date: Date;
   ticketPrice: number;
   imageUrl: string;
+  videoUrl?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,10 +36,24 @@ const EventSchema: Schema = new Schema({
   imageUrl: {
     type: String,
     required: [true, 'Please provide an image URL for the event']
+  },
+  videoUrl: {
+    type: String,
+    required: false,
+    default: undefined
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  // Add schema version to force refresh
+  versionKey: false
 });
 
-// Prevent mongoose from creating the model multiple times
-export default mongoose.models.Event || mongoose.model<IEvent>('Event', EventSchema); 
+// Force model recreation to ensure schema changes are applied
+if (mongoose.models.Event) {
+  delete mongoose.models.Event;
+}
+
+// Export the model, ensuring it's properly typed
+const Event = mongoose.model<IEvent>('Event', EventSchema);
+
+export default Event; 

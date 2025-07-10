@@ -86,12 +86,32 @@
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+.helpText {
+  display: block;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
 .imagePreview {
   margin-top: 1rem;
   text-align: center;
 }
 
 .imagePreview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.videoPreview {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.videoPreview video {
   max-width: 100%;
   max-height: 200px;
   border-radius: 8px;

@@ -1,0 +1,1 @@
+export const TONELAB_POSTER_URL = 'https://artbox.am/storage/uploads/projectlanding/image/643956ea4552e_Poster_ToneLab%20no%20logo.png';

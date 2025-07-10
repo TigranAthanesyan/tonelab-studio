@@ -3,12 +3,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 4rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .logo {
@@ -23,7 +26,7 @@
 }
 
 .logo a:hover {
-  color: #fc3;
+  color: var(--primary);
 }
 
 .navLinks {
@@ -55,7 +58,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #fc3;
+  background: var(--gradient-primary);
 }
 
 @media (max-width: 768px) {
