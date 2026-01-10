@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   title: venueConfig.name,
   description: venueConfig.shortDescription,
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 

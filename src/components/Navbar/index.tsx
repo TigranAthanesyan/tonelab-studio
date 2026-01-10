@@ -33,10 +33,10 @@ export default function Navbar() {
         <div className={styles.logo}>
           <Link href="/" onClick={closeMenu} className={styles.logoLink}>
             <Image 
-              src="/logo.svg" 
+              src="/logo.png" 
               alt={venueConfig.name}
-              width={180}
-              height={40}
+              width={50}
+              height={50}
               priority
               className={styles.logoImage}
             />

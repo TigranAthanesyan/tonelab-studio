@@ -37,7 +37,9 @@
 .logoImage {
   height: auto;
   width: auto;
-  max-height: 40px;
+  max-height: 50px;
+  max-width: 50px;
+  border-radius: 4px;
 }
 
 .navLinks {
@@ -119,11 +121,12 @@
   }
   
   .logo {
-    max-height: 32px;
+    max-height: 40px;
   }
   
   .logoImage {
-    max-height: 32px;
+    max-height: 40px;
+    max-width: 40px;
   }
   
   .hamburger {
@@ -165,11 +168,12 @@
   }
   
   .logo {
-    max-height: 28px;
+    max-height: 36px;
   }
   
   .logoImage {
-    max-height: 28px;
+    max-height: 36px;
+    max-width: 36px;
   }
   
   .navLinks {
