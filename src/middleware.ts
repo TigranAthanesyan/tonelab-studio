@@ -4,10 +4,16 @@ import { NextResponse } from 'next/server';
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
+    const isLoginPage = req.nextUrl.pathname === '/admin/login';
     const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
     const isAdminApiRoute = req.nextUrl.pathname.startsWith('/api/admin');
 
-    // Check if user is admin for admin routes
+    // Allow access to login page
+    if (isLoginPage) {
+      return NextResponse.next();
+    }
+
+    // Check if user is admin for admin routes (excluding login)
     if ((isAdminRoute || isAdminApiRoute) && token?.role !== 'admin') {
       return NextResponse.redirect(new URL('/admin/login', req.url));
     }
