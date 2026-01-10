@@ -1,0 +1,52 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+}
+
+.default {
+  box-shadow: var(--shadow-sm);
+}
+
+.elevated {
+  box-shadow: var(--shadow-md);
+  background: var(--surface-elevated);
+}
+
+.elevated:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.poster {
+  position: relative;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.poster::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-dark);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.poster:hover::before {
+  opacity: 0.3;
+}
+
+.poster:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
+}

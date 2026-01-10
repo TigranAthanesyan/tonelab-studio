@@ -12,7 +12,7 @@ interface Event {
   date: string;
   ticketUrl: string;
   imageUrl: string;
-  videoUrl?: string; // Optional video URL
+  videoUrl?: string;
 }
 
 export default function EventsList() {
@@ -22,7 +22,6 @@ export default function EventsList() {
 
   useEffect(() => {
     fetchEvents();
-
   }, []);
 
   const fetchEvents = async () => {
@@ -30,7 +29,11 @@ export default function EventsList() {
       const response = await fetch("/api/events");
       const data = await response.json();
       if (data.success) {
-        setEvents(data.data);
+        // Sort events by date (upcoming first)
+        const sortedEvents = data.data.sort((a: Event, b: Event) => 
+          new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+        setEvents(sortedEvents);
       } else {
         setError(data.error);
       }
@@ -41,74 +44,96 @@ export default function EventsList() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    const day = date.getDate();
+    return { month, day };
+  };
+
   if (loading) {
-    return <div className={styles.eventsPage}><div className="container">Loading events...</div></div>;
+    return (
+      <div className={styles.eventsPage}>
+        <div className={styles.loading}>
+          <div className={styles.loadingSpinner}></div>
+          <p>Loading events...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className={styles.eventsPage}><div className="container text-red-600">{error}</div></div>;
+    return (
+      <div className={styles.eventsPage}>
+        <div className={styles.error}>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className={styles.eventsPage}>
-      <div className="container">
-        {/* <h1 className={styles.pageTitle}>Upcoming Events</h1>
-        <p className={styles.pageDescription}>
-          Join us for exciting performances, workshops, and musical gatherings at Tonelab Studio.
-        </p> */}
-        <div className={styles.eventsList}>
-          {events.length === 0 ? (
-            <p className="text-gray-500">No events found.</p>
-          ) : (
-            events.map((event) => (
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Upcoming Shows</h1>
+        <p className={styles.pageSubtitle}>
+          Live music events at Yerevan&apos;s premier venue
+        </p>
+      </div>
+
+      {events.length === 0 ? (
+        <div className={styles.emptyState}>
+          <p>No upcoming events. Check back soon!</p>
+        </div>
+      ) : (
+        <div className={styles.eventsGrid}>
+          {events.map((event) => {
+            const { month, day } = formatDate(event.date);
+            return (
               <Link key={event._id} href={`/events/${event._id}`} className={styles.eventCard}>
-                <div className={styles.eventImage}>
+                <div className={styles.eventImageWrapper}>
                   {event.videoUrl ? (
-                    <div className={styles.videoContainer}>
-                      <video 
-                        src={event.videoUrl} 
-                        poster={event.imageUrl}
-                        muted
-                        loop
-                        style={{ objectFit: 'contain', width: '100%', height: '100%' }}
-                      />
-                    </div>
+                    <video 
+                      src={event.videoUrl} 
+                      poster={event.imageUrl}
+                      muted
+                      loop
+                      className={styles.eventMedia}
+                    />
                   ) : (
                     <Image
                       src={event.imageUrl} 
                       alt={event.title}
-                      width={200}
-                      height={200}
-                      style={{ objectFit: 'contain' }}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className={styles.eventMedia}
                     />
                   )}
+                  <div className={styles.dateBadge}>
+                    <span className={styles.dateMonth}>{month}</span>
+                    <span className={styles.dateDay}>{day}</span>
+                  </div>
                 </div>
-                <div className={styles.eventDate}>
-                  <span>{new Date(event.date).toLocaleDateString([], { month: 'short', day: 'numeric' })}</span>
-                </div>
-                <div className={styles.eventInfo}>
-                  <h2>{event.title}</h2>
-                  <p>{event.description}</p>
-                  <div className="mt-2">
-                    <a 
-                      href={event.ticketUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className={styles.ticketLink}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Get Tickets
-                    </a>
+                
+                <div className={styles.eventContent}>
+                  <h2 className={styles.eventTitle}>{event.title}</h2>
+                  <p className={styles.eventDescription}>
+                    {event.description.length > 100
+                      ? `${event.description.substring(0, 100)}...`
+                      : event.description}
+                  </p>
+                  <div className={styles.eventFooter}>
+                    <span className={styles.ticketCta}>Get Tickets →</span>
                     {event.videoUrl && (
-                      <span className="ml-2 text-sm text-blue-500">📹 Video available</span>
+                      <span className={styles.videoIndicator}>📹</span>
                     )}
                   </div>
                 </div>
               </Link>
-            ))
-          )}
+            );
+          })}
         </div>
-      </div>
+      )}
     </div>
   );
 } 
