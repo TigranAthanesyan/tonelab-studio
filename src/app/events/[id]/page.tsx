@@ -10,7 +10,7 @@ interface Event {
   title: string;
   description: string;
   date: string;
-  ticketPrice: number;
+  ticketUrl: string;
   imageUrl: string;
   videoUrl?: string; // Optional video URL
 }
@@ -113,20 +113,20 @@ export default function EventPage({ params }: { params: { id: string } }) {
               </span>
             </div>
             
-            <div className={styles.eventPrice}>
-              <span className={styles.priceLabel}>Ticket Price:</span>
-              <span className={styles.priceValue}>${event.ticketPrice.toFixed(2)}</span>
-            </div>
-            
             <div className={styles.eventDescription}>
               <h2>About This Event</h2>
               <p>{event.description}</p>
             </div>
             
             <div className={styles.eventActions}>
-              <button className={styles.bookButton}>
-                Book Tickets
-              </button>
+              <a 
+                href={event.ticketUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.bookButton}
+              >
+                Get Tickets
+              </a>
               <button className={styles.shareButton}>
                 Share Event
               </button>
