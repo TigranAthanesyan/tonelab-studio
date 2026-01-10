@@ -21,7 +21,7 @@ export default function AboutPage() {
           <h2>Our Facilities</h2>
           <div className={styles.facilitiesGrid}>
             <div className={styles.facilityCard}>
-              <h3>Concert Venue</h3>x``
+              <h3>Concert Venue</h3>
               <p>Intimate performance space with professional sound and lighting for up to 100 people.</p>
             </div>
             
@@ -47,8 +47,36 @@ export default function AboutPage() {
           <p>
             Tonelab Studio is run by a team of passionate musicians, sound engineers, and music educators dedicated to creating an exceptional experience for all visitors.
           </p>
-          <div className={styles.teamMembers}>
-            {/* Team members would go here in a real site */}
+        </section>
+
+        <section className={styles.section}>
+          <h2>Find Us</h2>
+          <div className={styles.locationInfo}>
+            <div className={styles.addressBlock}>
+              <h3>Address</h3>
+              <p>{venueConfig.address.full}</p>
+              <p className={styles.nearbyInfo}>{venueConfig.address.nearby}</p>
+              <a 
+                href={venueConfig.maps.searchUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.directionsLink}
+              >
+                Get Directions →
+              </a>
+            </div>
+            <div className={styles.mapContainer}>
+              <iframe
+                src={venueConfig.maps.embedUrl}
+                width="100%"
+                height="400"
+                style={{ border: 0, borderRadius: '8px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="ToneLab Studio Location"
+              ></iframe>
+            </div>
           </div>
         </section>
       </div>

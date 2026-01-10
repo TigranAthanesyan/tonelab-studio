@@ -1,11 +1,22 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import { venueConfig } from "@/config/venue";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
+        <div className={styles.heroBackground}>
+          <Image
+            src="/logo.png"
+            alt=""
+            width={470}
+            height={470}
+            className={styles.backgroundLogo}
+            priority
+          />
+        </div>
         <div className={styles.heroContent}>
           <h1>{venueConfig.name.toUpperCase()}</h1>
           <p>{venueConfig.tagline}</p>
