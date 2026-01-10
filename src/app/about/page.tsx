@@ -1,15 +1,16 @@
 import styles from './about.module.css';
+import { venueConfig } from '@/config/venue';
 
 export default function AboutPage() {
   return (
     <div className={styles.aboutPage}>
       <div className="container">
-        <h1 className={styles.pageTitle}>About Tonelab Studio</h1>
+        <h1 className={styles.pageTitle}>About {venueConfig.name}</h1>
         
         <section className={styles.section}>
-          <h2>Our Story</h2>
+          <h2>Who We Are</h2>
           <p>
-            Founded in 2020, Tonelab Studio emerged from a passion for music and a desire to create a vibrant community space for musicians and music lovers in Yerevan. What began as a small rehearsal space has grown into a comprehensive music center offering concerts, lessons, recording facilities, and more.
+            {venueConfig.shortDescription}
           </p>
           <p>
             Our mission is to foster musical talent, provide high-quality resources for artists, and create memorable musical experiences for our community.

@@ -1,13 +1,14 @@
 import styles from "./page.module.css";
 import Link from "next/link";
+import { venueConfig } from "@/config/venue";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1>TONELAB STUDIO</h1>
-          <p>Yerevan&apos;s Premier Music Space</p>
+          <h1>{venueConfig.name.toUpperCase()}</h1>
+          <p>{venueConfig.tagline}</p>
           <div className={styles.heroCtas}>
             <Link href="/events" className={styles.primaryBtn}>
               Upcoming Events

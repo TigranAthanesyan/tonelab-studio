@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SessionProvider from "@/components/SessionProvider";
+import { venueConfig } from "@/config/venue";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tonelab Studio",
-  description: "Yerevan's Premier Music Venue and Rehearsal Space",
+  title: venueConfig.name,
+  description: venueConfig.shortDescription,
 };
 
 export default function RootLayout({

@@ -38,7 +38,65 @@
 
 .socialIcons {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.socialLink:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.socialLink svg {
+  flex-shrink: 0;
+}
+
+.contactLink {
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contactLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.mapLink,
+.ticketsLink {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.mapLink:hover,
+.ticketsLink:hover {
+  background-color: var(--primary);
+  color: black;
+  transform: translateY(-2px);
+}
+
+.nearbyInfo {
+  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
 }
 
 .socialIcons a {
