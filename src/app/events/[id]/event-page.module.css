@@ -1,252 +1,271 @@
 .eventPage {
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
-  color: white;
+  color: var(--text-secondary);
   text-decoration: none;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  transition: opacity 0.2s ease;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xl);
+  transition: color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--font-size-sm);
 }
 
 .backLink:hover {
-  opacity: 0.8;
+  color: var(--accent-primary);
 }
 
-.loading, .error {
-  text-align: center;
-  color: white;
-  padding: 4rem 0;
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--gradient-accent);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--spacing-lg);
 }
 
-.error h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.backButton:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
 }
 
-.error p {
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.eventContainer {
-  background: white;
-  border-radius: 16px;
+.heroSection {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  margin-bottom: var(--spacing-3xl);
+  border: 2px solid var(--border-color);
 }
 
-.eventImage {
-  position: relative;
-  min-height: 400px;
-}
-
-.eventImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.videoContainer {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
-
-.mainVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-.videoOverlay {
+.heroImage {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
 }
 
-.videoIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.heroMedia {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
-.eventDetails {
-  padding: 3rem;
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.3) 0%,
+    rgba(10, 10, 10, 0.7) 60%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  min-height: 70vh;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: flex-end;
+  padding: var(--spacing-3xl);
+}
+
+.heroText {
+  width: 100%;
+  max-width: 800px;
 }
 
 .eventTitle {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a202c;
-  margin: 0;
-  line-height: 1.2;
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
 }
 
-.eventDate, .eventPrice {
+.eventMeta {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.metaItem {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f7fafc;
-  border-radius: 8px;
-}
-
-.dateLabel, .priceLabel {
+  gap: var(--spacing-sm);
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
   font-weight: 600;
-  color: #4a5568;
-  min-width: 120px;
 }
 
-.dateValue, .priceValue {
-  font-weight: 500;
-  color: #2d3748;
+.metaItem svg {
+  color: var(--accent-primary);
+  flex-shrink: 0;
 }
 
-.eventDescription h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #1a202c;
-  margin: 0 0 1rem 0;
-}
-
-.eventDescription p {
-  color: #4a5568;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.eventVideo {
-  margin-top: 1rem;
-}
-
-.eventVideo h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #1a202c;
-  margin: 0 0 1rem 0;
-}
-
-.eventVideo video {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.eventActions {
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.bookButton, .shareButton {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
+.ticketButton {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  background: var(--gradient-accent);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: var(--font-size-lg);
+  box-shadow: var(--shadow-md);
 }
 
-.bookButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  flex: 1;
-}
-
-.bookButton:hover {
+.ticketButton:hover {
+  box-shadow: var(--shadow-glow);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
-.shareButton {
-  background: #e2e8f0;
-  color: #4a5568;
-  border: 1px solid #cbd5e0;
+.contentSection {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.shareButton:hover {
-  background: #cbd5e0;
-  color: #2d3748;
+.descriptionBox {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
-/* Responsive Design */
+.descriptionBox h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+}
+
+.descriptionBox p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+.videoNote {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--surface);
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-md);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.videoNote svg {
+  flex-shrink: 0;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: var(--spacing-3xl) var(--spacing-xl);
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+}
+
+.loadingSpinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.error p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
 @media (max-width: 768px) {
-  .eventContainer {
-    grid-template-columns: 1fr;
+  .heroSection {
+    min-height: 60vh;
   }
   
-  .eventDetails {
-    padding: 2rem;
+  .heroContent {
+    min-height: 60vh;
+    padding: var(--spacing-2xl);
   }
   
-  .eventTitle {
-    font-size: 2rem;
-  }
-  
-  .eventActions {
+  .eventMeta {
     flex-direction: column;
+    gap: var(--spacing-md);
   }
   
-  .eventDate, .eventPrice {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .ticketButton {
+    width: 100%;
+    justify-content: center;
   }
   
-  .dateLabel, .priceLabel {
-    min-width: auto;
+  .contentSection {
+    padding: 0 var(--spacing-md);
   }
   
-  .videoOverlay {
-    top: 0.5rem;
-    right: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
+  .descriptionBox {
+    padding: var(--spacing-xl);
   }
 }
 
 @media (max-width: 480px) {
-  .eventPage {
-    padding: 1rem 0;
+  .heroContent {
+    padding: var(--spacing-lg);
   }
   
-  .eventDetails {
-    padding: 1.5rem;
+  .descriptionBox {
+    padding: var(--spacing-lg);
   }
   
-  .eventTitle {
-    font-size: 1.75rem;
+  .descriptionBox h2 {
+    font-size: var(--font-size-xl);
   }
 } 

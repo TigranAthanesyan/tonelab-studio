@@ -1,167 +1,190 @@
 .page {
   min-height: 100vh;
-  background-color: #f7fafc;
-  padding: 40px 20px;
+  background: var(--background);
+  padding: var(--spacing-3xl) var(--spacing-xl);
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .header {
-  margin-bottom: 32px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .backLink {
   display: inline-block;
-  color: #667eea;
+  color: var(--text-secondary);
   text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 16px;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-lg);
   transition: color 0.2s;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .backLink:hover {
-  color: #5568d3;
+  color: var(--accent-primary);
 }
 
 .title {
-  font-size: 32px;
-  font-weight: bold;
-  color: #1a202c;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .loading {
   text-align: center;
-  padding: 60px 20px;
-  font-size: 18px;
-  color: #718096;
+  padding: var(--spacing-3xl) var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
 }
 
 .errorMessage {
-  background-color: #fed7d7;
-  color: #c53030;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 24px;
-  font-size: 14px;
-  border: 1px solid #fc8181;
+  background-color: rgba(255, 68, 68, 0.1);
+  color: #4477ff;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-sm);
+  border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
 .form {
-  background: white;
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .formGroup {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-xl);
 }
 
 .label {
   display: block;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 600;
-  color: #2d3748;
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .input,
 .textarea {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #cbd5e0;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.2s;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  transition: all 0.2s;
   font-family: inherit;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-tertiary);
 }
 
 .input:focus,
 .textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(255, 0, 85, 0.1);
 }
 
 .textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 150px;
 }
 
 .fileInput {
   width: 100%;
-  padding: 8px 0;
-  font-size: 14px;
+  padding: var(--spacing-sm) 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
 }
 
 .helpText {
   display: block;
-  font-size: 13px;
-  color: #718096;
-  margin-top: 6px;
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  margin-top: var(--spacing-sm);
 }
 
 .imagePreview,
 .videoPreview {
-  margin-top: 16px;
-  border-radius: 8px;
+  margin-top: var(--spacing-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
+  background: var(--background-secondary);
 }
 
 .imagePreview img {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   height: auto;
   display: block;
 }
 
 .formActions {
   display: flex;
-  gap: 12px;
+  gap: var(--spacing-md);
   justify-content: flex-end;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
 }
 
 .cancelButton {
-  padding: 12px 24px;
-  background: white;
-  color: #4a5568;
-  border: 1px solid #cbd5e0;
-  border-radius: 6px;
-  font-size: 16px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: background 0.2s;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .cancelButton:hover {
-  background: #f7fafc;
+  background: var(--surface-elevated);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .submitButton {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--gradient-accent);
+  color: var(--text-primary);
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .submitButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: var(--shadow-glow);
 }
 
 .submitButton:active:not(:disabled) {
@@ -169,6 +192,26 @@
 }
 
 .submitButton:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+  .page {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+  
+  .form {
+    padding: var(--spacing-xl);
+  }
+  
+  .formActions {
+    flex-direction: column;
+  }
+  
+  .cancelButton,
+  .submitButton {
+    width: 100%;
+  }
+}
+

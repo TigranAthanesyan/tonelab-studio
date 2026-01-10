@@ -8,7 +8,7 @@ import styles from './login.module.css';
 export default function AdminLoginPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: ''
   });
   const [error, setError] = useState<string | null>(null);
@@ -21,13 +21,13 @@ export default function AdminLoginPage() {
 
     try {
       const result = await signIn('credentials', {
-        email: formData.email,
+        username: formData.username,
         password: formData.password,
         redirect: false
       });
 
       if (result?.error) {
-        setError('Invalid email or password');
+        setError('Invalid username or password');
       } else if (result?.ok) {
         router.push('/admin/events');
         router.refresh();
@@ -55,17 +55,17 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className={styles.loginForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="email" className={styles.label}>
-                Email
+              <label htmlFor="username" className={styles.label}>
+                Username
               </label>
               <input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                type="text"
+                id="username"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 className={styles.input}
                 required
-                autoComplete="email"
+                autoComplete="username"
               />
             </div>
 

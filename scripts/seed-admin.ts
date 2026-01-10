@@ -6,7 +6,7 @@
  * 
  * Requires environment variables:
  * - MONGODB_URI
- * - ADMIN_EMAIL
+ * - ADMIN_USERNAME
  * - ADMIN_PASSWORD
  */
 
@@ -19,7 +19,7 @@ import User from '../src/models/User';
 dotenv.config({ path: '.env.local' });
 
 const MONGODB_URI = process.env.MONGODB_URI;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 async function seedAdmin() {
@@ -28,8 +28,8 @@ async function seedAdmin() {
     process.exit(1);
   }
 
-  if (!ADMIN_EMAIL) {
-    console.error('❌ Error: ADMIN_EMAIL environment variable is not set');
+  if (!ADMIN_USERNAME) {
+    console.error('❌ Error: ADMIN_USERNAME environment variable is not set');
     process.exit(1);
   }
 
@@ -44,10 +44,10 @@ async function seedAdmin() {
     console.log('✅ Connected to MongoDB');
 
     // Check if admin already exists
-    const existingAdmin = await User.findOne({ email: ADMIN_EMAIL.toLowerCase() });
+    const existingAdmin = await User.findOne({ username: ADMIN_USERNAME.toLowerCase() });
     
     if (existingAdmin) {
-      console.log(`ℹ️  Admin user with email ${ADMIN_EMAIL} already exists`);
+      console.log(`ℹ️  Admin user with username ${ADMIN_USERNAME} already exists`);
       
       // Update password if needed
       const passwordHash = await hashPassword(ADMIN_PASSWORD);
@@ -60,12 +60,12 @@ async function seedAdmin() {
       const passwordHash = await hashPassword(ADMIN_PASSWORD);
       
       const admin = await User.create({
-        email: ADMIN_EMAIL.toLowerCase(),
+        username: ADMIN_USERNAME.toLowerCase(),
         passwordHash,
         role: 'admin'
       });
 
-      console.log(`✅ Created admin user: ${admin.email}`);
+      console.log(`✅ Created admin user: ${admin.username}`);
     }
 
     console.log('🎉 Seed completed successfully!');

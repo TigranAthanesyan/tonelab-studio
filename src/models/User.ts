@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser extends Document {
-  email: string;
+  username: string;
   passwordHash: string;
   role: 'admin' | 'user';
   createdAt: Date;
@@ -9,13 +9,14 @@ export interface IUser extends Document {
 }
 
 const UserSchema: Schema = new Schema({
-  email: {
+  username: {
     type: String,
-    required: [true, 'Email is required'],
+    required: [true, 'Username is required'],
     unique: true,
     trim: true,
     lowercase: true,
-    match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address']
+    minlength: [3, 'Username must be at least 3 characters long'],
+    maxlength: [30, 'Username must be less than 30 characters']
   },
   passwordHash: {
     type: String,
