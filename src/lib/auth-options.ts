@@ -9,31 +9,31 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email' },
+        username: { label: 'Username', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error('Email and password are required');
+        if (!credentials?.username || !credentials?.password) {
+          throw new Error('Username and password are required');
         }
 
         await dbConnect();
 
-        const user = await User.findOne({ email: credentials.email.toLowerCase() });
+        const user = await User.findOne({ username: credentials.username.toLowerCase() });
         
         if (!user) {
-          throw new Error('Invalid email or password');
+          throw new Error('Invalid username or password');
         }
 
         const isValid = await verifyPassword(credentials.password, user.passwordHash);
 
         if (!isValid) {
-          throw new Error('Invalid email or password');
+          throw new Error('Invalid username or password');
         }
 
         return {
           id: String(user._id),
-          email: user.email,
+          username: user.username,
           role: user.role
         };
       }
@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = (user as { role?: string }).role;
+        token.username = (user as { username?: string }).username;
       }
       return token;
     },
@@ -51,6 +52,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as { id?: string }).id = token.id as string;
         (session.user as { role?: string }).role = token.role as string;
+        (session.user as { username?: string }).username = token.username as string;
       }
       return session;
     }

@@ -5,10 +5,10 @@
   --surface: #1a1a1a;
   --surface-elevated: #222222;
   
-  /* Neon accent - electric red/purple */
-  --accent-primary: #ff0055;
-  --accent-secondary: #bb00ff;
-  --accent-glow: rgba(255, 0, 85, 0.5);
+  /* Neon accent - electric blue/purple/violet */
+  --accent-primary: #00a8ff;
+  --accent-secondary: #8b5cf6;
+  --accent-glow: rgba(0, 168, 255, 0.5);
   
   /* Text colors */
   --foreground: #ffffff;

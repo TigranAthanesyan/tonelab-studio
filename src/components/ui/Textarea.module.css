@@ -43,11 +43,11 @@
 }
 
 .textarea.error {
-  border-color: #ff4444;
+  border-color: #4477ff;
 }
 
 .errorMessage {
   font-size: var(--font-size-xs);
-  color: #ff4444;
+  color: #4477ff;
   margin-top: var(--spacing-xs);
 }

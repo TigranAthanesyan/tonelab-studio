@@ -47,7 +47,7 @@
 
 .errorMessage {
   background-color: rgba(255, 68, 68, 0.1);
-  color: #ff4444;
+  color: #4477ff;
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-xl);
