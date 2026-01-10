@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './styles.module.css';
+import { venueConfig } from '@/config/venue';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export default function Navbar() {
       <div className={styles.navContainer}>
         <div className={styles.logo}>
           <Link href="/" onClick={closeMenu}>
-            TONELAB STUDIO
+            {venueConfig.name.toUpperCase()}
           </Link>
         </div>
         
