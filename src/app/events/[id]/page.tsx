@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./event-page.module.css";
@@ -10,23 +10,24 @@ interface Event {
   title: string;
   description: string;
   date: string;
-  ticketPrice: number;
+  ticketUrl: string;
   imageUrl: string;
   videoUrl?: string; // Optional video URL
 }
 
-export default function EventPage({ params }: { params: { id: string } }) {
+export default function EventPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEvent();
-  }, [params.id]);
+  }, [id]);
 
   const fetchEvent = async () => {
     try {
-      const response = await fetch(`/api/events/${params.id}`);
+      const response = await fetch(`/api/events/${id}`);
       const data = await response.json();
       if (data.success) {
         setEvent(data.data);
@@ -113,20 +114,20 @@ export default function EventPage({ params }: { params: { id: string } }) {
               </span>
             </div>
             
-            <div className={styles.eventPrice}>
-              <span className={styles.priceLabel}>Ticket Price:</span>
-              <span className={styles.priceValue}>${event.ticketPrice.toFixed(2)}</span>
-            </div>
-            
             <div className={styles.eventDescription}>
               <h2>About This Event</h2>
               <p>{event.description}</p>
             </div>
             
             <div className={styles.eventActions}>
-              <button className={styles.bookButton}>
-                Book Tickets
-              </button>
+              <a 
+                href={event.ticketUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.bookButton}
+              >
+                Get Tickets
+              </a>
               <button className={styles.shareButton}>
                 Share Event
               </button>

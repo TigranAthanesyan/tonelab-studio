@@ -10,7 +10,7 @@ interface Event {
   title: string;
   description: string;
   date: string;
-  ticketPrice: number;
+  ticketUrl: string;
   imageUrl: string;
   videoUrl?: string; // Optional video URL
 }
@@ -89,13 +89,20 @@ export default function EventsList() {
                 <div className={styles.eventInfo}>
                   <h2>{event.title}</h2>
                   <p>{event.description}</p>
-                  <div className="mt-2 text-sm text-gray-500">
-                    <span>Price: ${event.ticketPrice.toFixed(2)}</span>
+                  <div className="mt-2">
+                    <a 
+                      href={event.ticketUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.ticketLink}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Get Tickets
+                    </a>
                     {event.videoUrl && (
-                      <span className="ml-2 text-blue-500">📹 Video available</span>
+                      <span className="ml-2 text-sm text-blue-500">📹 Video available</span>
                     )}
                   </div>
-                  {/* You can add a "Get Tickets" button here if needed */}
                 </div>
               </Link>
             ))
