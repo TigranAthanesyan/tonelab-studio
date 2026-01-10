@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./event-page.module.css";
@@ -15,18 +15,19 @@ interface Event {
   videoUrl?: string; // Optional video URL
 }
 
-export default function EventPage({ params }: { params: { id: string } }) {
+export default function EventPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEvent();
-  }, [params.id]);
+  }, [id]);
 
   const fetchEvent = async () => {
     try {
-      const response = await fetch(`/api/events/${params.id}`);
+      const response = await fetch(`/api/events/${id}`);
       const data = await response.json();
       if (data.success) {
         setEvent(data.data);

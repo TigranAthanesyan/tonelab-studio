@@ -7,12 +7,13 @@ import { EventUpdateSchema } from '@/lib/validations';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect();
     
-    const event = await Event.findById(params.id);
+    const { id } = await params;
+    const event = await Event.findById(id);
     
     if (!event) {
       return NextResponse.json(
@@ -36,7 +37,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -51,6 +52,7 @@ export async function PUT(
 
     await dbConnect();
     
+    const { id } = await params;
     const body = await request.json();
     
     // Validate input
@@ -58,7 +60,7 @@ export async function PUT(
     
     if (!validation.success) {
       return NextResponse.json(
-        { success: false, error: validation.error.errors[0].message },
+        { success: false, error: validation.error.issues[0].message },
         { status: 400 }
       );
     }
@@ -71,7 +73,7 @@ export async function PUT(
     }
     
     const event = await Event.findByIdAndUpdate(
-      params.id,
+      id,
       updateData,
       { new: true, runValidators: true }
     );
@@ -97,7 +99,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -112,7 +114,8 @@ export async function DELETE(
 
     await dbConnect();
     
-    const event = await Event.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const event = await Event.findByIdAndDelete(id);
     
     if (!event) {
       return NextResponse.json(
