@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './styles.module.css';
 import { venueConfig } from '@/config/venue';
@@ -30,8 +31,15 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div className={styles.logo}>
-          <Link href="/" onClick={closeMenu}>
-            {venueConfig.name.toUpperCase()}
+          <Link href="/" onClick={closeMenu} className={styles.logoLink}>
+            <Image 
+              src="/logo.svg" 
+              alt={venueConfig.name}
+              width={180}
+              height={40}
+              priority
+              className={styles.logoImage}
+            />
           </Link>
         </div>
         

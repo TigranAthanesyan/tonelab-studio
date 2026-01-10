@@ -19,23 +19,25 @@
 }
 
 .logo {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  letter-spacing: 0.1em;
   z-index: 1001;
+  display: flex;
+  align-items: center;
 }
 
-.logo a {
-  color: var(--text-primary);
-  transition: all 0.2s ease;
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.logoLink {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
 }
 
-.logo a:hover {
+.logoLink:hover {
   opacity: 0.8;
+}
+
+.logoImage {
+  height: auto;
+  width: auto;
+  max-height: 40px;
 }
 
 .navLinks {
@@ -117,7 +119,11 @@
   }
   
   .logo {
-    font-size: var(--font-size-lg);
+    max-height: 32px;
+  }
+  
+  .logoImage {
+    max-height: 32px;
   }
   
   .hamburger {
@@ -159,7 +165,11 @@
   }
   
   .logo {
-    font-size: var(--font-size-base);
+    max-height: 28px;
+  }
+  
+  .logoImage {
+    max-height: 28px;
   }
   
   .navLinks {
