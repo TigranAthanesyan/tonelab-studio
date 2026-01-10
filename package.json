@@ -6,15 +6,22 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed:admin": "tsx scripts/seed-admin.ts"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/mongoose": "^5.11.96",
+    "bcryptjs": "^3.0.3",
     "cloudinary": "^2.7.0",
+    "dotenv": "^17.2.3",
     "mongoose": "^8.16.1",
     "next": "15.3.1",
+    "next-auth": "^4.24.13",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tsx": "^4.21.0",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

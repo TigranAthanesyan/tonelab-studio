@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/models/Event';
+import { authOptions } from '@/lib/auth-options';
+import { EventCreateSchema } from '@/lib/validations';
 
 export async function GET() {
   try {
@@ -18,45 +21,42 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const session = await getServerSession(authOptions);
+    
+    if (!session || session.user.role !== 'admin') {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     await dbConnect();
     
-    // Handle event data (JSON format)
     const body = await request.json();
-    const { title, description, date, ticketPrice, imageUrl, videoUrl } = body;
     
-    // Debug logging
-    console.log('Received event data:', { title, description, date, ticketPrice, imageUrl, videoUrl });
+    // Validate input
+    const validation = EventCreateSchema.safeParse(body);
     
-    // Check if videoUrl field exists in schema
-    const schema = Event.schema;
-    console.log('Schema fields:', Object.keys(schema.paths));
-    console.log('videoUrl field exists:', 'videoUrl' in schema.paths);
-    
-    // Validate that imageUrl is present
-    if (!imageUrl || typeof imageUrl !== 'string') {
+    if (!validation.success) {
       return NextResponse.json(
-        { success: false, error: 'Valid imageUrl is required' },
+        { success: false, error: validation.error.errors[0].message },
         { status: 400 }
       );
     }
+
+    const { title, description, date, ticketUrl, imageUrl, videoUrl } = validation.data;
     
-    // Create event data object
     const eventData = {
       title,
       description,
       date: new Date(date),
-      ticketPrice,
+      ticketUrl,
       imageUrl,
-      videoUrl // This is optional, so it can be undefined
+      videoUrl
     };
     
-    console.log('Creating event with data:', eventData);
-    
-    // Create event with image URL and optional video URL
     const event = await Event.create(eventData);
-    
-    console.log('Created event:', event);
-    console.log('Event videoUrl:', event.videoUrl);
     
     return NextResponse.json({ success: true, data: event }, { status: 201 });
   } catch (error: unknown) {

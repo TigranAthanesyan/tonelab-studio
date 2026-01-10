@@ -4,7 +4,7 @@ export interface IEvent extends Document {
   title: string;
   description: string;
   date: Date;
-  ticketPrice: number;
+  ticketUrl: string;
   imageUrl: string;
   videoUrl?: string;
   createdAt: Date;
@@ -28,10 +28,21 @@ const EventSchema: Schema = new Schema({
     type: Date,
     required: [true, 'Please provide a date for the event']
   },
-  ticketPrice: {
-    type: Number,
-    required: [true, 'Please provide a ticket price for the event'],
-    min: [0, 'Ticket price cannot be negative']
+  ticketUrl: {
+    type: String,
+    required: [true, 'Please provide a ticket URL for the event'],
+    trim: true,
+    validate: {
+      validator: function(v: string) {
+        try {
+          new URL(v);
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      message: 'Please provide a valid URL for tickets'
+    }
   },
   imageUrl: {
     type: String,
