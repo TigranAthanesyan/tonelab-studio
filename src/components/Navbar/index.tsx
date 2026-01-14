@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './styles.module.css';
+import { venueConfig } from '@/config/venue';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -29,8 +31,15 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div className={styles.logo}>
-          <Link href="/" onClick={closeMenu}>
-            TONELAB STUDIO
+          <Link href="/" onClick={closeMenu} className={styles.logoLink}>
+            <Image 
+              src="/logo.png" 
+              alt={venueConfig.name}
+              width={50}
+              height={50}
+              priority
+              className={styles.logoImage}
+            />
           </Link>
         </div>
         

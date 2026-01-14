@@ -77,7 +77,7 @@ export default function EventsList() {
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Upcoming Shows</h1>
         <p className={styles.pageSubtitle}>
-          Live music events at Yerevan&apos;s premier venue
+          Live music events at ToneLab Studio
         </p>
       </div>
 
