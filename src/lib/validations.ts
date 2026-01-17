@@ -13,16 +13,29 @@ export const LoginSchema = z.object({
 });
 
 // Event validation schemas
+// Custom validator for URLs that can be either full URLs or local paths
+const imageOrVideoUrl = z.string().refine((val: string) => {
+  // Allow local paths starting with /
+  if (val.startsWith('/')) return true;
+  // Allow full URLs
+  try {
+    new URL(val);
+    return true;
+  } catch {
+    return false;
+  }
+}, 'Invalid URL or path');
+
 export const EventCreateSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title cannot exceed 100 characters'),
   description: z.string().min(1, 'Description is required').max(1000, 'Description cannot exceed 1000 characters'),
-  date: z.string().refine((date) => {
+  date: z.string().refine((date: string) => {
     const d = new Date(date);
     return !isNaN(d.getTime());
   }, 'Invalid date format'),
   ticketUrl: z.string().url('Invalid ticket URL'),
-  imageUrl: z.string().url('Invalid image URL'),
-  videoUrl: z.string().url('Invalid video URL').optional()
+  imageUrl: imageOrVideoUrl,
+  videoUrl: imageOrVideoUrl.optional()
 });
 
 export const EventUpdateSchema = EventCreateSchema.partial();
