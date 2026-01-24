@@ -12,7 +12,7 @@
   overflow: hidden;
   text-align: center;
   padding: var(--spacing-2xl);
-  background: linear-gradient(180deg, var(--background) 0%, var(--background-secondary) 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.5) 0%, rgba(21, 21, 21, 0.5) 100%);
 }
 
 .heroBackground {
