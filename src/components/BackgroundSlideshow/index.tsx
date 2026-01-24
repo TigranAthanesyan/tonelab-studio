@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styles from './BackgroundSlideshow.module.css';
 
 // Gallery images from public/gallery/
@@ -31,9 +31,9 @@ export default function BackgroundSlideshow() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [imageOrder, setImageOrder] = useState<string[]>(GALLERY_IMAGES);
-  const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
   
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const preloadedRef = useRef<Set<string>>(new Set());
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -53,21 +53,16 @@ export default function BackgroundSlideshow() {
     setImageOrder(shuffleArray(GALLERY_IMAGES));
   }, []);
 
-  // Preload the next image to avoid blank flash
-  const preloadImage = useCallback((src: string) => {
-    if (imagesLoaded.has(src)) return;
-    
-    const img = new Image();
-    img.onload = () => {
-      setImagesLoaded(prev => new Set([...prev, src]));
-    };
-    img.src = src;
-  }, [imagesLoaded]);
-
-  // Preload images on mount
+  // Preload all images once on mount
   useEffect(() => {
-    imageOrder.forEach(src => preloadImage(src));
-  }, [imageOrder, preloadImage]);
+    imageOrder.forEach(src => {
+      if (preloadedRef.current.has(src)) return;
+      preloadedRef.current.add(src);
+      
+      const img = new Image();
+      img.src = src;
+    });
+  }, [imageOrder]);
 
   // Handle rotation timer
   useEffect(() => {
