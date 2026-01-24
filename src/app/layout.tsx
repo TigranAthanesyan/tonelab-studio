@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SessionProvider from "@/components/SessionProvider";
+import BackgroundSlideshow from "@/components/BackgroundSlideshow";
 import { venueConfig } from "@/config/venue";
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <BackgroundSlideshow />
         <SessionProvider>
           <div className="navbar-wrapper">
             <Navbar />
