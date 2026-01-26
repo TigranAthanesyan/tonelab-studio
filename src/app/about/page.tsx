@@ -17,7 +17,7 @@ export default function AboutPage() {
         <section className={styles.section}>
           <h2>Our Team</h2>
           <p>
-            Tonelab Studio is run by a team of passionate musicians, sound engineers and educators with a mission to organize the full cycle of rock and alternative music production in Armenia.
+            ToneLab Studio is run by a team of passionate musicians, sound engineers and educators with a mission to organize the full cycle of rock and alternative music production in Armenia.
           </p>
         </section>
 

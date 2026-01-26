@@ -6,7 +6,7 @@
 export const venueConfig = {
   // Basic Information
   name: "ToneLab Studio",
-  shortDescription: "Tonelab Studio is run by a team of passionate musicians, sound engineers and educators with a mission to organize the full cycle of rock and alternative music production in Armenia.",
+  shortDescription: "ToneLab Studio is run by a team of passionate musicians, sound engineers and educators with a mission to organize the full cycle of rock and alternative music production in Armenia.",
   tagline: "An Independent Music Space in the Heart of Yerevan",
   subtitle: "Concert venue / Studio / School",
   
