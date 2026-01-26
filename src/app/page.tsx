@@ -20,6 +20,7 @@ export default function Home() {
         <div className={styles.heroContent}>
           <h1>{venueConfig.name.toUpperCase()}</h1>
           <p>{venueConfig.tagline}</p>
+          <p className={styles.subtitle}>{venueConfig.subtitle}</p>
           <div className={styles.heroCtas}>
             <Link href="/events" className={styles.primaryBtn}>
               Upcoming Events
@@ -38,22 +39,27 @@ export default function Home() {
           <div className={styles.featureGrid}>
             <div className={styles.featureCard}>
               <h3>Live Concerts</h3>
-              <p>Experience amazing performances from local and international artists in our intimate venue.</p>
+              <p>Experience live shows by local and international artists weekly - immersive sound, arena approach to the club.</p>
             </div>
             
             <div className={styles.featureCard}>
-              <h3>Rehearsal Spaces</h3>
-              <p>Professional studios equipped with high-quality instruments and equipment for musicians.</p>
+              <h3>Rehearsal Space</h3>
+              <p>Our fully equipped stage becomes a cozy, well-suited space for rehearsals and music practice on weekdays.</p>
+              <p>Professional tech support throughout your stay. Enjoy our library lounge corner with some drinks during a break.</p>
+              <div className={styles.pricingDetails}>
+                <h4>Monthly Subscription Plans</h4>
+                <ul>
+                  <li><strong>16 hours a month</strong> - Twice a week, 2 hours per day - 60,000 AMD</li>
+                  <li><strong>8 hours per month</strong> - Once a week, 2 hours per day - 35,000 AMD</li>
+                  <li><strong>Hourly rent</strong> - 5,000 AMD (two hour minimum)</li>
+                </ul>
+              </div>
             </div>
             
             <div className={styles.featureCard}>
               <h3>Music Lessons</h3>
-              <p>Learn from experienced instructors in various instruments and musical styles.</p>
-            </div>
-            
-            <div className={styles.featureCard}>
-              <h3>Community Events</h3>
-              <p>Join workshops, jams, and networking events for music enthusiasts and professionals.</p>
+              <p>Our educators have more than a decade of experience as professional musicians, so whether you&apos;re just starting out or looking to advance your skills, we&apos;ve got you covered.</p>
+              <Link href="/lessons" className={styles.learnMoreLink}>Learn more →</Link>
             </div>
           </div>
         </div>

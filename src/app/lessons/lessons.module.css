@@ -90,6 +90,48 @@
   background-color: var(--primary-dark);
 }
 
+.otherCourses {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.otherCourses h2 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.otherCourses p {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.contactButton {
+  display: inline-block;
+  background-color: var(--primary);
+  color: black;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.contactButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.placeholderCard {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.placeholderText {
+  font-style: italic;
+  opacity: 0.7;
+}
+
 @media (max-width: 768px) {
   .lessonMeta {
     flex-direction: column;
