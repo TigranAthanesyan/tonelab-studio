@@ -40,6 +40,7 @@ export default function Home() {
             <div className={styles.featureCard}>
               <h3>Live Concerts</h3>
               <p>Experience live shows by local and international artists weekly - immersive sound, arena approach to the club.</p>
+              <Link href="/events" className={styles.learnMoreLink}>Learn more →</Link>
             </div>
             
             <div className={styles.featureCard}>

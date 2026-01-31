@@ -20,21 +20,30 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.25;
+  opacity: 0;
   transition: opacity ease-in-out;
 }
 
-/* Current image fades out to reveal next image underneath */
+/* Current image (first layer) is visible by default */
 .imageLayer:first-of-type {
   z-index: 1;
+  opacity: 0.25;
 }
 
+/* Next image (second layer) is hidden by default, only shown during transition */
 .imageLayer:nth-of-type(2) {
   z-index: 0;
+  opacity: 0;
 }
 
+/* During transition, fade out current image to reveal next */
 .fadeOut {
   opacity: 0 !important;
+}
+
+/* Show next image only during transition */
+.showNext {
+  opacity: 0.25 !important;
 }
 
 /* Dark overlay for improved text readability */

@@ -121,9 +121,10 @@ export default function BackgroundSlideshow() {
       
       {/* Next image layer (underneath, revealed during transition) */}
       <div
-        className={styles.imageLayer}
+        className={`${styles.imageLayer} ${isTransitioning ? styles.showNext : ''}`}
         style={{
           backgroundImage: `url("${nextImage}")`,
+          transitionDuration: `${FADE_DURATION}ms`,
         }}
       />
       
