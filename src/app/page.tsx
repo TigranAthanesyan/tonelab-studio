@@ -46,14 +46,7 @@ export default function Home() {
               <h3>Rehearsal Space</h3>
               <p>Our fully equipped stage becomes a cozy, well-suited space for rehearsals and music practice on weekdays.</p>
               <p>Professional tech support throughout your stay. Enjoy our library lounge corner with some drinks during a break.</p>
-              <div className={styles.pricingDetails}>
-                <h4>Monthly Subscription Plans</h4>
-                <ul>
-                  <li><strong>16 hours a month</strong> - Twice a week, 2 hours per day - 60,000 AMD</li>
-                  <li><strong>8 hours per month</strong> - Once a week, 2 hours per day - 35,000 AMD</li>
-                  <li><strong>Hourly rent</strong> - 5,000 AMD (two hour minimum)</li>
-                </ul>
-              </div>
+              <Link href="/rehearsal" className={styles.learnMoreLink}>Learn more →</Link>
             </div>
             
             <div className={styles.featureCard}>

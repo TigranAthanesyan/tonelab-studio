@@ -36,7 +36,7 @@
 
 .lessonCard h2 {
   margin-bottom: 1rem;
-  color: var(--primary);
+  color: var(--accent-primary);
 }
 
 .lessonCard > p {
@@ -71,23 +71,12 @@
 
 .pricing p {
   font-weight: bold;
-  color: var(--primary);
+  color: var(--accent-primary);
 }
 
-.bookButton {
-  background-color: var(--primary);
-  color: black;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+.cardButton {
   width: 100%;
-}
-
-.bookButton:hover {
-  background-color: var(--primary-dark);
+  margin-top: auto;
 }
 
 .otherCourses {
@@ -100,27 +89,12 @@
 
 .otherCourses h2 {
   margin-bottom: 1rem;
-  color: var(--primary);
+  color: var(--accent-primary);
 }
 
 .otherCourses p {
   margin-bottom: 1.5rem;
   opacity: 0.8;
-}
-
-.contactButton {
-  display: inline-block;
-  background-color: var(--primary);
-  color: black;
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.contactButton:hover {
-  background-color: var(--primary-dark);
 }
 
 .placeholderCard {

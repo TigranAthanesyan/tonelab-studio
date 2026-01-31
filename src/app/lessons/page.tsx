@@ -2,6 +2,7 @@
 
 import styles from './lessons.module.css';
 import { venueConfig } from '@/config/venue';
+import Button from '@/components/ui/Button';
 
 type Lesson = {
   id: number;
@@ -51,10 +52,6 @@ export default function LessonsPage() {
       isPlaceholder: true
     }
   ];
-  
-  const handleContactUs = () => {
-    window.location.href = `/contact`;
-  };
 
   return (
     <div className={styles.lessonsPage}>
@@ -85,12 +82,9 @@ export default function LessonsPage() {
                 </div>
               </div>
               
-              <button 
-                className={styles.bookButton}
-                onClick={handleContactUs}
-              >
+              <Button asLink href="/contact" variant="primary" className={styles.cardButton}>
                 Contact Us
-              </button>
+              </Button>
             </div>
           ))}
         </div>
@@ -98,9 +92,9 @@ export default function LessonsPage() {
         <div className={styles.otherCourses}>
           <h2>Looking for Other Instrument Courses?</h2>
           <p>Contact us and we&apos;ll tailor a program for you.</p>
-          <a href={`tel:${venueConfig.phone}`} className={styles.contactButton}>
+          <Button asLink href={`tel:${venueConfig.phone}`} variant="primary" size="lg">
             Call Us: {venueConfig.phone}
-          </a>
+          </Button>
         </div>
       </div>
     </div>
