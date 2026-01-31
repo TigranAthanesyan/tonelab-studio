@@ -72,18 +72,18 @@ export default function BackgroundSlideshow() {
     }
 
     timerRef.current = setInterval(() => {
+      // Start the transition - nextIndex should already be set to the correct next image
       setIsTransitioning(true);
       
-      // Calculate next indices (avoid immediate repeats via shuffled order)
-      const nextIdx = (currentIndex + 1) % imageOrder.length;
-      const upcomingIdx = (nextIdx + 1) % imageOrder.length;
-      
-      setNextIndex(nextIdx);
-      
-      // After transition completes, swap layers
+      // After transition completes, swap layers and prepare the next image
       setTimeout(() => {
-        setCurrentIndex(nextIdx);
-        setNextIndex(upcomingIdx);
+        // Move to the next image
+        setCurrentIndex(prevCurrent => {
+          const newCurrent = (prevCurrent + 1) % imageOrder.length;
+          // Prepare the upcoming next image (will be shown in the next transition)
+          setNextIndex((newCurrent + 1) % imageOrder.length);
+          return newCurrent;
+        });
         setIsTransitioning(false);
       }, FADE_DURATION);
       
@@ -94,7 +94,7 @@ export default function BackgroundSlideshow() {
         clearInterval(timerRef.current);
       }
     };
-  }, [currentIndex, imageOrder.length, prefersReducedMotion]);
+  }, [imageOrder.length, prefersReducedMotion]);
 
   // Don't render if no images
   if (imageOrder.length === 0) {
