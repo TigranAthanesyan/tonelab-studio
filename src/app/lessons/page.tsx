@@ -3,6 +3,16 @@
 import styles from './lessons.module.css';
 import { venueConfig } from '@/config/venue';
 import Button from '@/components/ui/Button';
+import ImageCarousel from '@/components/ImageCarousel';
+
+// Lesson images from public/lessons
+const LESSON_IMAGES = [
+  '/lessons/D44A9180.JPG',
+  '/lessons/D44A9191.JPG',
+  '/lessons/D44A9224.JPG',
+  '/lessons/D44A9255.JPG',
+  '/lessons/D44A9267.JPG',
+];
 
 type Lesson = {
   id: number;
@@ -60,6 +70,8 @@ export default function LessonsPage() {
         <p className={styles.pageDescription}>
           Our educators have more than a decade of experience as professional musicians, so whether you&apos;re just starting out or looking to advance your skills, we&apos;ve got you covered.
         </p>
+
+        <ImageCarousel images={LESSON_IMAGES} interval={6000} />
 
         <div className={styles.lessonsList}>
           {lessonTypes.map(lesson => (
