@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './BackgroundSlideshow.module.css';
 
 // Gallery images from public/gallery/
@@ -32,8 +32,10 @@ export default function BackgroundSlideshow() {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [imageOrder, setImageOrder] = useState<string[]>(GALLERY_IMAGES);
   
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const preloadedRef = useRef<Set<string>>(new Set());
+  const isTransitioningRef = useRef(false);
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -64,6 +66,27 @@ export default function BackgroundSlideshow() {
     });
   }, [imageOrder]);
 
+  // Transition to next image
+  const transitionToNext = useCallback(() => {
+    // Prevent double transitions
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+    
+    // Start the fade transition
+    setIsTransitioning(true);
+    
+    // After transition completes, update indices
+    timerRef.current = setTimeout(() => {
+      setCurrentIndex(prev => {
+        const newIndex = (prev + 1) % imageOrder.length;
+        return newIndex;
+      });
+      setNextIndex(prev => (prev + 1) % imageOrder.length);
+      setIsTransitioning(false);
+      isTransitioningRef.current = false;
+    }, FADE_DURATION);
+  }, [imageOrder.length]);
+
   // Handle rotation timer
   useEffect(() => {
     // Don't rotate if user prefers reduced motion or only one image
@@ -71,30 +94,17 @@ export default function BackgroundSlideshow() {
       return;
     }
 
-    timerRef.current = setInterval(() => {
-      // Start the transition - nextIndex should already be set to the correct next image
-      setIsTransitioning(true);
-      
-      // After transition completes, swap layers and prepare the next image
-      setTimeout(() => {
-        // Move to the next image
-        setCurrentIndex(prevCurrent => {
-          const newCurrent = (prevCurrent + 1) % imageOrder.length;
-          // Prepare the upcoming next image (will be shown in the next transition)
-          setNextIndex((newCurrent + 1) % imageOrder.length);
-          return newCurrent;
-        });
-        setIsTransitioning(false);
-      }, FADE_DURATION);
-      
-    }, ROTATION_INTERVAL);
+    intervalRef.current = setInterval(transitionToNext, ROTATION_INTERVAL);
 
     return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
       if (timerRef.current) {
-        clearInterval(timerRef.current);
+        clearTimeout(timerRef.current);
       }
     };
-  }, [imageOrder.length, prefersReducedMotion]);
+  }, [imageOrder.length, prefersReducedMotion, transitionToNext]);
 
   // Don't render if no images
   if (imageOrder.length === 0) {
