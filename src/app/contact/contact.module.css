@@ -82,15 +82,16 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   text-decoration: none;
-  color: var(--primary);
+  color: #00a8ff;
   transition: all 0.3s ease;
 }
 
 .mapLink:hover,
 .ticketsLink:hover {
-  background-color: var(--primary);
-  color: black;
+  background-color: #00a8ff;
+  color: #000;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
 }
 
 .nearbyInfo {
@@ -99,21 +100,7 @@
   font-style: italic;
 }
 
-.socialIcons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
 
-.socialIcons a:hover {
-  background-color: var(--primary);
-  color: black;
-}
 
 .contactForm h2 {
   font-size: 1.5rem;

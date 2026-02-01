@@ -186,6 +186,54 @@
   line-height: 1.6;
 }
 
+.pricingDetails {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.pricingDetails h4 {
+  color: var(--accent-primary);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pricingDetails ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pricingDetails li {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: var(--font-size-sm);
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem) !important;
+  color: var(--accent-primary) !important;
+  margin-bottom: var(--spacing-xl) !important;
+  font-weight: 500;
+}
+
+.learnMoreLink {
+  display: inline-block;
+  margin-top: var(--spacing-md);
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--font-size-sm);
+  transition: color 0.2s ease;
+}
+
+.learnMoreLink:hover {
+  color: var(--text-primary);
+}
+
 @media (max-width: 768px) {
   .hero {
     min-height: 70vh;

@@ -1,0 +1,130 @@
+.rehearsalPage {
+  padding: 2rem 0;
+}
+
+.pageTitle {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.pageDescription {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  opacity: 0.8;
+}
+
+.section {
+  margin-bottom: 4rem;
+}
+
+.section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.featuresList li {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.featuresList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.75rem;
+  color: var(--accent-primary);
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.pricingCard {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.pricingCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+}
+
+.pricingCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent-primary);
+  margin-bottom: 1.5rem;
+}
+
+.pricingCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pricingCard li {
+  padding: 0.5rem 0;
+  opacity: 0.8;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.ctaSection h2 {
+  margin-bottom: 1rem;
+  color: var(--accent-primary);
+}
+
+.ctaSection > p {
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 2.5rem;
+  }
+  
+  .pricingGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

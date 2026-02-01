@@ -6,8 +6,9 @@
 export const venueConfig = {
   // Basic Information
   name: "ToneLab Studio",
-  shortDescription: "Music venue, studio and school in the heart of Yerevan.",
-  tagline: "Yerevan's Premier Music Space",
+  shortDescription: "ToneLab Studio is run by a team of passionate musicians, sound engineers and educators with a mission to organize the full cycle of rock and alternative music production in Armenia.",
+  tagline: "An Independent Music Space in the Heart of Yerevan",
+  subtitle: "Concert venue / Studio / School",
   
   // Location
   address: {
@@ -19,7 +20,7 @@ export const venueConfig = {
   },
   
   // Contact
-  phone: "+374 98 607475",
+  phone: "+374 44 498803",
   email: "tonelab.armenia@gmail.com",
   
   // Social Media
@@ -27,6 +28,7 @@ export const venueConfig = {
     instagram: "https://www.instagram.com/tonelab_studio/",
     facebook: "https://www.facebook.com/100091266667959/",
     linktree: "https://linktr.ee/tonelab.armenia",
+    youtube: "https://www.youtube.com/@TonelabStudio",
   },
   
   // Ticketing & Venue Pages

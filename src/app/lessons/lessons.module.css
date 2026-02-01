@@ -36,7 +36,7 @@
 
 .lessonCard h2 {
   margin-bottom: 1rem;
-  color: var(--primary);
+  color: var(--accent-primary);
 }
 
 .lessonCard > p {
@@ -71,23 +71,39 @@
 
 .pricing p {
   font-weight: bold;
-  color: var(--primary);
+  color: var(--accent-primary);
 }
 
-.bookButton {
-  background-color: var(--primary);
-  color: black;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+.cardButton {
   width: 100%;
+  margin-top: auto;
 }
 
-.bookButton:hover {
-  background-color: var(--primary-dark);
+.otherCourses {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.otherCourses h2 {
+  margin-bottom: 1rem;
+  color: var(--accent-primary);
+}
+
+.otherCourses p {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.placeholderCard {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.placeholderText {
+  font-style: italic;
+  opacity: 0.7;
 }
 
 @media (max-width: 768px) {
