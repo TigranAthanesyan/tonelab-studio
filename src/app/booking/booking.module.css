@@ -1,0 +1,294 @@
+.bookingPage {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+.pageTitle {
+  font-size: 48px;
+  margin-bottom: 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pageDescription {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 48px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bookingSection {
+  margin-bottom: 80px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.sectionTitle {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: white;
+  text-align: center;
+}
+
+.sectionDescription {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contentBox {
+  margin-bottom: 32px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.contentBox h3,
+.contentBox h4 {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.contentBox h3 {
+  font-size: 24px;
+}
+
+.contentBox h4 {
+  font-size: 18px;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+}
+
+.featuresList li {
+  padding: 12px 0;
+  padding-left: 32px;
+  position: relative;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+.featuresList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pricingCard {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricingCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pricingCard h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #10b981;
+  margin: 16px 0;
+}
+
+.pricingCard ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.pricingCard ul li {
+  padding: 8px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.lessonsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin: 32px 0;
+}
+
+.lessonCard {
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lessonCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.lessonCard h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.lessonCard p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 24px;
+}
+
+.lessonMeta {
+  margin-top: 24px;
+}
+
+.levels,
+.pricing {
+  margin-bottom: 16px;
+}
+
+.levels h4,
+.pricing h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.pricing p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.placeholderCard {
+  opacity: 0.7;
+  border-style: dashed;
+}
+
+.placeholderText {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.otherCourses {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-top: 32px;
+}
+
+.otherCourses h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.otherCourses p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.highlight {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  padding: 24px;
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin-top: 40px;
+}
+
+.ctaSection h2 {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.ctaSection p {
+  font-size: 18px;
+  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .bookingPage {
+    padding: 80px 0 40px;
+  }
+  
+  .pageTitle {
+    font-size: 36px;
+  }
+  
+  .bookingSection {
+    padding: 24px 16px;
+    margin-bottom: 48px;
+  }
+  
+  .sectionTitle {
+    font-size: 28px;
+  }
+  
+  .contentBox {
+    padding: 16px;
+  }
+  
+  .pricingGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lessonsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
