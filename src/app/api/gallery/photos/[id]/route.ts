@@ -6,7 +6,7 @@ import { authOptions } from '@/lib/auth-options';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -20,7 +20,8 @@ export async function DELETE(
 
     await dbConnect();
     
-    const photo = await GalleryPhoto.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const photo = await GalleryPhoto.findByIdAndDelete(id);
     
     if (!photo) {
       return NextResponse.json(
@@ -41,7 +42,7 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -58,8 +59,9 @@ export async function PUT(
     const body = await request.json();
     const { description, order } = body;
     
+    const { id } = await params;
     const photo = await GalleryPhoto.findByIdAndUpdate(
-      params.id,
+      id,
       { description, order },
       { new: true, runValidators: true }
     );
