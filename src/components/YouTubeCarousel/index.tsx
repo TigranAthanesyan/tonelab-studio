@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import styles from './YouTubeCarousel.module.css';
 
 interface GalleryVideo {
@@ -45,6 +45,13 @@ export default function YouTubeCarousel({ videos }: YouTubeCarouselProps) {
     setCurrentIndex(index);
   }, []);
 
+  // Memoize video ID extraction
+  const currentVideo = videos[currentIndex];
+  const videoId = useMemo(() => 
+    currentVideo ? getYouTubeVideoId(currentVideo.youtubeUrl) : null,
+    [currentVideo]
+  );
+
   if (videos.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -52,9 +59,6 @@ export default function YouTubeCarousel({ videos }: YouTubeCarouselProps) {
       </div>
     );
   }
-
-  const currentVideo = videos[currentIndex];
-  const videoId = getYouTubeVideoId(currentVideo.youtubeUrl);
 
   return (
     <div className={styles.carousel}>

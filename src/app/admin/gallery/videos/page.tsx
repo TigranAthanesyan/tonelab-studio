@@ -193,7 +193,7 @@ export default function AdminGalleryVideosPage() {
                   type="number"
                   id="order"
                   value={formData.order}
-                  onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                  onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value, 10) || 0 })}
                   className={styles.input}
                 />
               </div>
