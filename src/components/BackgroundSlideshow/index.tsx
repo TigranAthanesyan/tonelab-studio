@@ -36,6 +36,7 @@ export default function BackgroundSlideshow() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const preloadedRef = useRef<Set<string>>(new Set());
   const isTransitioningRef = useRef(false);
+  const hasShuffledRef = useRef(false);
 
   // Check for reduced motion preference
   useEffect(() => {
@@ -50,9 +51,12 @@ export default function BackgroundSlideshow() {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Shuffle images on initial load for variety
+  // Shuffle images on initial load for variety (only once)
   useEffect(() => {
-    setImageOrder(shuffleArray(GALLERY_IMAGES));
+    if (!hasShuffledRef.current) {
+      hasShuffledRef.current = true;
+      setImageOrder(shuffleArray(GALLERY_IMAGES));
+    }
   }, []);
 
   // Preload all images once on mount
@@ -77,11 +81,9 @@ export default function BackgroundSlideshow() {
     
     // After transition completes, update indices
     timerRef.current = setTimeout(() => {
-      setCurrentIndex(prev => {
-        const newIndex = (prev + 1) % imageOrder.length;
-        return newIndex;
-      });
-      setNextIndex(prev => (prev + 1) % imageOrder.length);
+      // Current becomes what next was, next becomes the image after that
+      setCurrentIndex(prev => (prev + 1) % imageOrder.length);
+      setNextIndex(prev => (prev + 2) % imageOrder.length);
       setIsTransitioning(false);
       isTransitioningRef.current = false;
     }, FADE_DURATION);
@@ -94,14 +96,30 @@ export default function BackgroundSlideshow() {
       return;
     }
 
+    // Clear any existing intervals
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+
+    // Reset transitioning state
+    isTransitioningRef.current = false;
+    setIsTransitioning(false);
+
     intervalRef.current = setInterval(transitionToNext, ROTATION_INTERVAL);
 
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+        timerRef.current = null;
       }
     };
   }, [imageOrder.length, prefersReducedMotion, transitionToNext]);
