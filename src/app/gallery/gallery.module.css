@@ -1,0 +1,78 @@
+.galleryPage {
+  min-height: 100vh;
+  padding: 100px 0 60px;
+}
+
+.pageTitle {
+  font-size: 48px;
+  margin-bottom: 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pageDescription {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 48px;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 32px;
+  text-align: center;
+  color: white;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.5);
+  border-radius: 8px;
+  color: #fca5a5;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .galleryPage {
+    padding: 80px 0 40px;
+  }
+  
+  .pageTitle {
+    font-size: 36px;
+  }
+  
+  .pageDescription {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .section {
+    margin-bottom: 60px;
+  }
+  
+  .section h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
