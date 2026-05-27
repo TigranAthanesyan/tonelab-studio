@@ -98,6 +98,9 @@ export default function AdminEventsPage() {
         <div className={styles.headerContent}>
           <h1 className={styles.title}>Admin Dashboard</h1>
           <div className={styles.headerActions}>
+            <Link href="/admin/gallery" className={styles.userEmail} style={{ textDecoration: 'none', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Gallery
+            </Link>
             <span className={styles.userEmail}>{session.user?.email}</span>
             <button onClick={() => signOut({ callbackUrl: '/admin/login' })} className={styles.signOutButton}>
               Sign Out

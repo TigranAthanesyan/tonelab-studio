@@ -1,0 +1,121 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.content {
+  position: relative;
+  max-width: min(1200px, 95vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.closeButton:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  line-height: 1;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.navButton:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.navPrev {
+  left: var(--spacing-xl);
+}
+
+.navNext {
+  right: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .backdrop {
+    padding: var(--spacing-sm);
+  }
+
+  .closeButton {
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+  }
+
+  .navButton {
+    width: 42px;
+    height: 42px;
+    font-size: 1.5rem;
+  }
+
+  .navPrev {
+    left: var(--spacing-sm);
+  }
+
+  .navNext {
+    right: var(--spacing-sm);
+  }
+}
