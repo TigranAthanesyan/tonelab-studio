@@ -64,3 +64,20 @@ export function joinLocalInput(date: string, hour: string, minute: string): stri
   return `${date}T${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
 }
 
+/**
+ * Return a `YYYY-MM-DD` string for the given date as observed in Yerevan
+ * (venue local) time. Useful for calendar-day comparisons that should be
+ * stable regardless of the viewer's timezone.
+ */
+export function yerevanDateKey(date: Date): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: VENUE_TIMEZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "00";
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+

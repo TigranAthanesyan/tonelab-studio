@@ -1,57 +1,60 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.css";
-
-interface Event {
-  _id: string;
-  title: string;
-  description: string;
-  date: string;
-  ticketUrl: string;
-  imageUrl: string;
-  videoUrl?: string;
-}
+import { EventCard, type EventItem } from "./EventCard";
+import PastEventsSlider from "./PastEventsSlider";
+import { yerevanDateKey } from "@/lib/time";
 
 export default function EventsList() {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [todayKey, setTodayKey] = useState<string | null>(null);
 
   useEffect(() => {
+    setTodayKey(yerevanDateKey(new Date()));
+  }, []);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/events");
+        const data = await response.json();
+        if (data.success) {
+          setEvents(data.data as EventItem[]);
+        } else {
+          setError(data.error);
+        }
+      } catch {
+        setError("Failed to fetch events");
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchEvents();
   }, []);
 
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch("/api/events");
-      const data = await response.json();
-      if (data.success) {
-        // Sort events by date (upcoming first)
-        const sortedEvents = data.data.sort((a: Event, b: Event) => 
-          new Date(a.date).getTime() - new Date(b.date).getTime()
-        );
-        setEvents(sortedEvents);
-      } else {
-        setError(data.error);
-      }
-    } catch {
-      setError("Failed to fetch events");
-    } finally {
-      setLoading(false);
+  const { upcomingEvents, pastEvents } = useMemo(() => {
+    if (!todayKey) {
+      return { upcomingEvents: [] as EventItem[], pastEvents: [] as EventItem[] };
     }
-  };
+    const upcoming: EventItem[] = [];
+    const past: EventItem[] = [];
+    for (const event of events) {
+      const key = yerevanDateKey(new Date(event.date));
+      if (key >= todayKey) {
+        upcoming.push(event);
+      } else {
+        past.push(event);
+      }
+    }
+    upcoming.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    past.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return { upcomingEvents: upcoming, pastEvents: past };
+  }, [events, todayKey]);
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const month = date.toLocaleDateString('en-US', { month: 'short', timeZone: 'Asia/Yerevan' }).toUpperCase();
-    const day = parseInt(date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Yerevan' }), 10);
-    return { month, day };
-  };
-
-  if (loading) {
+  if (loading || todayKey === null) {
     return (
       <div className={styles.eventsPage}>
         <div className={styles.loading}>
@@ -76,64 +79,30 @@ export default function EventsList() {
     <div className={styles.eventsPage}>
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>Upcoming Shows</h1>
-        <p className={styles.pageSubtitle}>
-          Live music events at ToneLab Studio
-        </p>
+        <p className={styles.pageSubtitle}>Live music events at ToneLab Studio</p>
       </div>
 
-      {events.length === 0 ? (
+      {upcomingEvents.length === 0 ? (
         <div className={styles.emptyState}>
           <p>No upcoming events. Check back soon!</p>
         </div>
       ) : (
         <div className={styles.eventsGrid}>
-          {events.map((event) => {
-            const { month, day } = formatDate(event.date);
-            return (
-              <Link key={event._id} href={`/events/${event._id}`} className={styles.eventCard}>
-                <div className={styles.eventImageWrapper}>
-                  {event.videoUrl ? (
-                    <video 
-                      src={event.videoUrl} 
-                      poster={event.imageUrl}
-                      muted
-                      loop
-                      className={styles.eventMedia}
-                    />
-                  ) : (
-                    <Image
-                      src={event.imageUrl} 
-                      alt={event.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className={styles.eventMedia}
-                    />
-                  )}
-                  <div className={styles.dateBadge}>
-                    <span className={styles.dateMonth}>{month}</span>
-                    <span className={styles.dateDay}>{day}</span>
-                  </div>
-                </div>
-                
-                <div className={styles.eventContent}>
-                  <h2 className={styles.eventTitle}>{event.title}</h2>
-                  <p className={styles.eventDescription}>
-                    {event.description.length > 100
-                      ? `${event.description.substring(0, 100)}...`
-                      : event.description}
-                  </p>
-                  <div className={styles.eventFooter}>
-                    <span className={styles.ticketCta}>Get Tickets →</span>
-                    {event.videoUrl && (
-                      <span className={styles.videoIndicator}>📹</span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {upcomingEvents.map((event) => (
+            <EventCard key={event._id} event={event} />
+          ))}
         </div>
+      )}
+
+      {pastEvents.length > 0 && (
+        <section className={styles.pastSection}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Past Shows</h2>
+            <p className={styles.sectionSubtitle}>A look back at recent nights</p>
+          </div>
+          <PastEventsSlider events={pastEvents} />
+        </section>
       )}
     </div>
   );
-} 
+}
