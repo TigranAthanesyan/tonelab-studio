@@ -172,6 +172,7 @@
   line-height: 1.8;
   font-size: var(--font-size-lg);
   margin: 0;
+  white-space: pre-wrap;
 }
 
 .videoNote {

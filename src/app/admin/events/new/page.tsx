@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './new.module.css';
+import { yerevanLocalInputToISO } from '@/lib/time';
+import EventDateTimePicker from '@/components/EventDateTimePicker';
 
 export default function NewEventPage() {
   const { data: session, status } = useSession();
@@ -83,11 +85,12 @@ export default function NewEventPage() {
         videoUrl = videoData.videoUrl;
       }
 
-      // Step 3: Create event with the image URL and optional video URL
+      // Step 3: Create event with the image URL and optional video URL.
+      // The date input is interpreted as Yerevan local time (GMT+4).
       const eventPayload = {
         title: formData.title,
         description: formData.description,
-        date: formData.date,
+        date: yerevanLocalInputToISO(formData.date),
         ticketUrl: formData.ticketUrl,
         imageUrl: imageData.imageUrl,
         videoUrl
@@ -218,15 +221,13 @@ export default function NewEventPage() {
 
           <div className={styles.formGroup}>
             <label htmlFor="date" className={styles.label}>
-              Date & Time *
+              Date & Time * <small>(Yerevan time, GMT+4)</small>
             </label>
-            <input
-              type="datetime-local"
+            <EventDateTimePicker
               id="date"
-              name="date"
               value={formData.date}
-              onChange={handleChange}
-              className={styles.input}
+              onChange={(value) => setFormData({ ...formData, date: value })}
+              controlClassName={styles.input}
               required
             />
           </div>

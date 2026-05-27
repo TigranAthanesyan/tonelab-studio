@@ -44,15 +44,17 @@ export default function EventPage({ params }: { params: Promise<{ id: string }> 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return {
-      full: date.toLocaleDateString('en-US', { 
+      full: date.toLocaleDateString('en-US', {
         weekday: 'long',
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'Asia/Yerevan'
       }),
-      time: date.toLocaleTimeString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      time: date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Yerevan'
       })
     };
   };

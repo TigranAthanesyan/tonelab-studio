@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './edit.module.css';
+import { yerevanLocalInputToISO, isoToYerevanLocalInput } from '@/lib/time';
+import EventDateTimePicker from '@/components/EventDateTimePicker';
 
 interface Event {
   _id: string;
@@ -57,8 +59,8 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         const eventData = data.data;
         setEvent(eventData);
         
-        // Format date for datetime-local input
-        const dateValue = new Date(eventData.date).toISOString().slice(0, 16);
+        // Format date for datetime-local input (Yerevan local time)
+        const dateValue = isoToYerevanLocalInput(eventData.date);
         
         setFormData({
           title: eventData.title,
@@ -133,11 +135,11 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         videoUrl = videoData.videoUrl;
       }
 
-      // Update event
+      // Update event. Date input is interpreted as Yerevan local time (GMT+4).
       const eventPayload = {
         title: formData.title,
         description: formData.description,
-        date: formData.date,
+        date: yerevanLocalInputToISO(formData.date),
         ticketUrl: formData.ticketUrl,
         imageUrl,
         videoUrl
@@ -280,15 +282,13 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
 
           <div className={styles.formGroup}>
             <label htmlFor="date" className={styles.label}>
-              Date & Time *
+              Date & Time * <small>(Yerevan time, GMT+4)</small>
             </label>
-            <input
-              type="datetime-local"
+            <EventDateTimePicker
               id="date"
-              name="date"
               value={formData.date}
-              onChange={handleChange}
-              className={styles.input}
+              onChange={(value) => setFormData({ ...formData, date: value })}
+              controlClassName={styles.input}
               required
             />
           </div>

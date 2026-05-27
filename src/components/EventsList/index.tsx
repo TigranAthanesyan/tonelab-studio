@@ -46,8 +46,8 @@ export default function EventsList() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-    const day = date.getDate();
+    const month = date.toLocaleDateString('en-US', { month: 'short', timeZone: 'Asia/Yerevan' }).toUpperCase();
+    const day = parseInt(date.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'Asia/Yerevan' }), 10);
     return { month, day };
   };
 

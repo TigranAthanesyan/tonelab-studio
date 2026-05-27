@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.date {
+  flex: 1 1 200px;
+  min-width: 160px;
+}
+
+.select {
+  flex: 0 0 auto;
+  min-width: 80px;
+}
+
+.colon {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
